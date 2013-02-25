@@ -1,3 +1,5 @@
+var gData = [];
+var gData2 = [];
 $(document).ready(function () {
     _.templateSettings = {
             interpolate: /\{\{(.+?)\}\}/g
@@ -20,7 +22,7 @@ function handleFileSelect(evt) {
 
     // Loop through the FileList.
     for (var i = 0, f; f = files[i]; i++) {
-        //console.log("Type ", f.type);
+        console.log("Type ", f.type);
       // Only process image files.
       if (!f.type.match('text/*')) {
         continue;
@@ -53,13 +55,21 @@ function stringToJSONObject(input){
 
     var data = $.map(res, function(value, index){
         var line = $.map(value, function(innerVal, innerIndex){
-            return {"value": innerVal, "name": header[innerIndex], "pos": innerIndex};
+            if(innerVal !== ""){
+              return {"value": innerVal, "name": header[innerIndex], "pos": innerIndex};
+            }
+            
         });
-        return {"line":line, "pos":index};
+        if(line.length >0){
+          return {"line":line, "pos":index};
+        }
     });
+    gData = data;
 
-    data.pop();
-
+    //console.log("data", data.length, data);
+    
+    //console.log("lastPerson",lastPerson);
+    
     var data2 = [];
     var tmp = [];
     $.each(data, function(index, value){
@@ -72,8 +82,14 @@ function stringToJSONObject(input){
                 tmp = [];
                 tmp.push(value);
             }
+        }else{
+          console.log("Problem Eintrag", value);
         }
     });
+    data2.push(tmp);
+    tmp = [];
+    gData2 = data2;
+    console.log("data2", data2.length, data2);
 
     res = {};
     res.group = group;
@@ -95,11 +111,24 @@ function printTables(schedules, target){
     $.each(schedules.data, function(index, value){
         var trs = "";
         $.each(value, function(lineIndex, lineValue){
+        console.log("sada", lineValue);
+        var datumVar = "";
+        if(!_.isUndefined(lineValue.line[3])){
+          datumVar = lineValue.line[3].value;
+        }
+        var iststundenVar = "";
+        if(!_.isUndefined(lineValue.line[4])){
+          iststundenVar = lineValue.line[4].value;
+        } 
+        var eintragVar = "";
+        if(!_.isUndefined(lineValue.line[5])){
+          eintragVar = lineValue.line[5].value;
+        }        
             trs += _.template(trTmpl,
                 {
-                "Datum": lineValue.line[3].value,
-                "Iststunden": lineValue.line[4].value,
-                "Eintrag": lineValue.line[5].value
+                "Datum": datumVar,
+                "Iststunden": iststundenVar,
+                "Eintrag": eintragVar
                  });
             if(lineValue.line[3].value.substring(0,2) === "15"){
                 //trs += '<tr class="breakPage" ></tr>';
