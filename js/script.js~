@@ -20,7 +20,7 @@ function handleFileSelect(evt) {
 
     // Loop through the FileList.
     for (var i = 0, f; f = files[i]; i++) {
-        console.log("Type ", f.type);
+        //console.log("Type ", f.type);
       // Only process image files.
       if (!f.type.match('text/*')) {
         continue;
