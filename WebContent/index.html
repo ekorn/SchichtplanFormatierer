@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Schichtplan Formatierer</title>
+</head>
+ <link rel="stylesheet" href="css/style.css" />
+ 
+ <style media="print">
+  .noPrint{ display: none; }
+  .breakPage{ page-break-after:always; }
+</style>
+
+<body>
+<div class="noPrint">
+<h1> Schichtplan Formatierer</h1>
+
+<input id="fileChooser" type="file" value="Scichtplan Export" />
+<button onClick="window.print()" id="printButton" >Drucken</button>
+<br>
+<hr>
+<br>
+</div>
+<output id="schedule"></output>
+
+<script src="js/underscore-min.js"></script>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/script.js"></script>
+
+<script type="text/template" id="tableTmpl">
+<table class="table-6 breakPage"> 
+  <caption>{{name}}</caption>
+  <thead>
+ <tr>
+  <th class="smallCell" >Datum</th>
+  <th class="smallCell" >Iststunden</th>
+  <th class="smallCell" >Eintrag</th>
+  <th class="smallCell" >V</th>
+  <th class="bigCell">Tätigkeit/ Begründung</th>
+  <th class="smallCell" >S</th>
+  <th class="smallCell">A</th>
+  <th class="smallCell">P</th>
+  <th class="smallCell">G</th>
+ </tr>
+  </thead>
+<tfoot>
+  <tr>
+    <td colspan="9">
+      V = Veränderung der Arbeitszeit ,S = stationär Stunden, A=ambulant Stunden, P = Pflege Stunden, G= Gesamt Stunden
+    </td>
+  </tr>
+</tfoot
+  <tbody>
+   {{trs}}
+  </tbody>
+
+</table>
+</script> 
+  
+<script type="text/template" id="trTmpl">
+ <tr>
+  <td>{{Datum}}</td>
+  <td>{{Iststunden}}</td>
+  <td>{{Eintrag}}</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+ </tr>
+</script> 
+
+
+   <script type="text/template" id="hrTmpl">
+<div class="noPrint">
+<br>
+<hr>
+<br>
+</div>
+</script> 
+
+</body>
+</html>
