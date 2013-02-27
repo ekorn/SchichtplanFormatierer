@@ -34,10 +34,6 @@ padding: 3px 10px;
 .table-6 td {
 padding: 3px 10px;
 border: 1px solid #B0B0B0;
-
-}
-
-.table-6 tbody {
 font-size: 11px;
 }
 

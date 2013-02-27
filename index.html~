@@ -18,7 +18,7 @@
 <input id="fileChooser" type="file" value="Scichtplan Export" />
 <div id="afterTableCalulation">
 <br>
-Bitte die Druckvorschau benutzen und die Seite(n) im Querformat drucken.
+Bitte die Druckvorschau benutzen und die Seite im Querformat drucken.
 <br>
 <select id="pageBreakAfterDay" name="pageBreakAfterDay">
 	<option> - Tag des Seitenumbruchs - </option>

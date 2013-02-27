@@ -12,8 +12,36 @@ $(document).ready(function () {
       alert('Die File APIs werden von deinem Browser nicht unterstützt. Bitte versuch es mit einem andern (z.B. aktuellen Firefox)');
     }
 
-$("#printButton").hide();
+$("#afterTableCalulation").hide();
 $("#fileChooser").change(handleFileSelect);
+
+$("#pageBreakAfterDay").change(function(event){
+  var dates = $(".dateTd");
+  $.each(dates, function(index, value){
+    var date = $(value).html().substring(0,2);
+    if(date == event.currentTarget.value){
+      //console.log("date",date);
+      $(value).parent().after('<tr class="breakPage innerTableBreak" ></tr>');
+    }
+  });
+//  console.log("pageBreakAfterDay", event.currentTarget.value );
+
+});
+
+$("#deleteInnerPageBreaks").click(function(){
+  //console.log("Remove",$('.innerTableBreak'));
+  $('.innerTableBreak').remove();
+})
+
+$("#fontSize").change(function(event){
+//console.log("fontSize", event.currentTarget.value);
+$("tbody").css("font-size", event.currentTarget.value + "px");
+});
+$("#columHeight").change(function(event){
+//console.log("columHeight", event.currentTarget.value);
+$("td").css("height", event.currentTarget.value + "px");
+});
+
 
 });
 
@@ -89,7 +117,7 @@ function stringToJSONObject(input){
     data2.push(tmp);
     tmp = [];
     gData2 = data2;
-    console.log("data2", data2.length, data2);
+    //console.log("data2", data2.length, data2);
 
     res = {};
     res.group = group;
@@ -111,7 +139,6 @@ function printTables(schedules, target){
     $.each(schedules.data, function(index, value){
         var trs = "";
         $.each(value, function(lineIndex, lineValue){
-        console.log("sada", lineValue);
         var datumVar = "";
         if(!_.isUndefined(lineValue.line[3])){
           datumVar = lineValue.line[3].value;
@@ -130,12 +157,6 @@ function printTables(schedules, target){
                 "Iststunden": iststundenVar,
                 "Eintrag": eintragVar
                  });
-            if(lineValue.line[3].value.substring(0,2) === "15"){
-                //trs += '<tr class="breakPage" ></tr>';
-                //trs += thTmpl;
-            }
-
-
         });
 
         var table = _.template(tableTmpl,
@@ -148,7 +169,7 @@ function printTables(schedules, target){
 
     });
 
-    $("#printButton").show(1000);
+    $("#afterTableCalulation").show(1000);
 }
 
 
