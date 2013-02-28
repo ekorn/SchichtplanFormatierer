@@ -49,3 +49,6 @@ background: #F2F2F2;
 .smallCell{
 	width:5%;
 }
+.center{
+  text-align:center;
+}

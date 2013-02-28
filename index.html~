@@ -14,9 +14,9 @@
 <body>
 <div class="noPrint">
 <h1> Schichtplan Formatierer</h1>
-<progress max="100"></progress>
+
 <input id="fileChooser" type="file" value="Scichtplan Export.txt" />
-<div id="spinner"></div>
+<progress id="progressbar" style="display: none;" max="100"></progress>
 <div id="optionsArea" style="display: none;">
 <br>
 Bitte die Druckvorschau benutzen und die Seite(n) im Querformat drucken.
@@ -92,19 +92,23 @@ Bitte die Druckvorschau benutzen und die Seite(n) im Querformat drucken.
 
 <script type="text/template" id="tableTmpl">
 <table class="table-6 breakPage"> 
-  <caption>{{name}}</caption>
   <thead>
- <tr>
-  <th class="smallCell" >Datum</th>
-  <th class="smallCell" >Iststunden</th>
-  <th class="smallCell" >Eintrag</th>
-  <th class="smallCell" >V</th>
-  <th class="bigCell">Tätigkeit/ Begründung</th>
-  <th class="smallCell" >S</th>
-  <th class="smallCell">A</th>
-  <th class="smallCell">P</th>
-  <th class="smallCell">G</th>
- </tr>
+    <tr>
+      <th colspan="9">
+      <div class="center">{{name}}</div>
+      </th>
+    </tr>
+   <tr>
+    <th class="smallCell" >Datum</th>
+    <th class="smallCell" >Iststunden</th>
+    <th class="smallCell" >Eintrag</th>
+    <th class="smallCell" >V</th>
+    <th class="bigCell">Tätigkeit/ Begründung</th>
+    <th class="smallCell" >S</th>
+    <th class="smallCell">A</th>
+    <th class="smallCell">P</th>
+    <th class="smallCell">G</th>
+   </tr>
   </thead>
 <tfoot>
   <tr>

@@ -92,19 +92,23 @@ Bitte die Druckvorschau benutzen und die Seite(n) im Querformat drucken.
 
 <script type="text/template" id="tableTmpl">
 <table class="table-6 breakPage"> 
-  <caption>{{name}}</caption>
   <thead>
- <tr>
-  <th class="smallCell" >Datum</th>
-  <th class="smallCell" >Iststunden</th>
-  <th class="smallCell" >Eintrag</th>
-  <th class="smallCell" >V</th>
-  <th class="bigCell">Tätigkeit/ Begründung</th>
-  <th class="smallCell" >S</th>
-  <th class="smallCell">A</th>
-  <th class="smallCell">P</th>
-  <th class="smallCell">G</th>
- </tr>
+    <tr>
+      <th colspan="9">
+      <div class="center">{{name}}</div>
+      </th>
+    </tr>
+   <tr>
+    <th class="smallCell" >Datum</th>
+    <th class="smallCell" >Iststunden</th>
+    <th class="smallCell" >Eintrag</th>
+    <th class="smallCell center" >V</th>
+    <th class="bigCell">Tätigkeit/ Begründung</th>
+    <th class="smallCell center" >S</th>
+    <th class="smallCell center">A</th>
+    <th class="smallCell center">P</th>
+    <th class="smallCell center">G</th>
+   </tr>
   </thead>
 <tfoot>
   <tr>
