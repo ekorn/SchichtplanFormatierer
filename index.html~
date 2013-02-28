@@ -14,11 +14,12 @@
 <body>
 <div class="noPrint">
 <h1> Schichtplan Formatierer</h1>
-
-<input id="fileChooser" type="file" value="Scichtplan Export" />
-<div id="afterTableCalulation">
+<progress max="100"></progress>
+<input id="fileChooser" type="file" value="Scichtplan Export.txt" />
+<div id="spinner"></div>
+<div id="optionsArea" style="display: none;">
 <br>
-Bitte die Druckvorschau benutzen und die Seite im Querformat drucken.
+Bitte die Druckvorschau benutzen und die Seite(n) im Querformat drucken.
 <br>
 <select id="pageBreakAfterDay" name="pageBreakAfterDay">
 	<option> - Tag des Seitenumbruchs - </option>
@@ -79,14 +80,15 @@ Bitte die Druckvorschau benutzen und die Seite im Querformat drucken.
 </select>
 </div>
 <br>
+<div id="usageInfo"></div>
+<br>
 <hr>
 <br>
 </div>
 <output id="schedule"></output>
 
-<script src="js/underscore-min.js"></script>
-<script src="js/jquery-1.9.1.min.js"></script>
-<script src="js/script.js"></script>
+<script data-main="js/main" src="js/require.min.js"></script>
+
 
 <script type="text/template" id="tableTmpl">
 <table class="table-6 breakPage"> 
