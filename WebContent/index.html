@@ -15,38 +15,112 @@
 <div class="noPrint">
 <h1> Schichtplan Formatierer</h1>
 
-<input id="fileChooser" type="file" value="Scichtplan Export" />
-<button onClick="window.print()" id="printButton" >Drucken</button>
+<input id="fileChooser" type="file" value="Schichtplan Export.txt" />
+<progress id="progressbar" style="display: none;" max="100"></progress>
+<div id="optionsArea" style="display: none;">
+<br>
+Bitte die Druckvorschau benutzen und die Seite(n) im Querformat drucken.
+<br>
+<select id="pageBreakAfterDay" name="pageBreakAfterDay">
+	<option> - Tag des Seitenumbruchs - </option>
+	<option value="01">01</option>
+	<option value="02">02</option>
+	<option value="03">03</option>
+	<option value="04">04</option>
+	<option value="05">05</option>
+	<option value="06">06</option>
+	<option value="07">07</option>
+	<option value="08">08</option>
+	<option value="09">09</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
+	<option value="14">14</option>
+	<option value="15">15</option>
+	<option value="16">16</option>
+	<option value="17">17</option>
+	<option value="18">18</option>
+	<option value="19">19</option>
+	<option value="20">20</option>
+	<option value="21">21</option>
+	<option value="22">22</option>
+	<option value="23">23</option>
+	<option value="24">24</option>
+	<option value="25">25</option>
+	<option value="26">26</option>
+	<option value="27">27</option>
+	<option value="28">28</option>
+	<option value="29">29</option>
+	<option value="30">30</option>
+	<option value="31">31</option>
+</select>
+<button id="deleteInnerPageBreaks"> Lösche Seitenumbrüche </button>
+
+<select id="fontSize" name="fontSize">
+	<option> - Schriftgröße - </option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
+	<option value="14">14</option>
+	<option value="15">15</option>
+	<option value="16">16</option>
+</select>
+
+<select id="columHeight" name="columHeight">
+	<option> - Zeilenhöhe - </option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
+	<option value="14">14</option>
+	<option value="15">15</option>
+	<option value="16">16</option>
+</select>
+</div>
+<br>
+<div id="usageInfo"></div>
 <br>
 <hr>
 <br>
 </div>
 <output id="schedule"></output>
 
-<script src="js/underscore-min.js"></script>
-<script src="js/jquery-1.9.1.min.js"></script>
-<script src="js/script.js"></script>
+<script data-main="js/main" src="js/require.min.js"></script>
+
 
 <script type="text/template" id="tableTmpl">
 <table class="table-6 breakPage"> 
-  <caption>{{name}}</caption>
   <thead>
- <tr>
-  <th class="smallCell" >Datum</th>
-  <th class="smallCell" >Iststunden</th>
-  <th class="smallCell" >Eintrag</th>
-  <th class="smallCell" >V</th>
-  <th class="bigCell">Tätigkeit/ Begründung</th>
-  <th class="smallCell" >S</th>
-  <th class="smallCell">A</th>
-  <th class="smallCell">P</th>
-  <th class="smallCell">G</th>
- </tr>
+    <tr>
+      <th colspan="9">
+      <div class="center">{{name}}</div>
+      </th>
+    </tr>
+   <tr>
+    <th class="smallCell" >Datum</th>
+    <th class="smallCell" >Iststunden</th>
+    <th class="smallCell" >Eintrag</th>
+    <th class="center" >V</th>
+    <th class="bigCell">Tätigkeit/ Begründung</th>
+    <th class="smallCell center" >S</th>
+    <th class="smallCell center">A</th>
+    <th class="smallCell center">P</th>
+    <th class="smallCell center">G</th>
+   </tr>
   </thead>
 <tfoot>
   <tr>
     <td colspan="9">
       V = Veränderung der Arbeitszeit ,S = stationär Stunden, A=ambulant Stunden, P = Pflege Stunden, G= Gesamt Stunden
+    </td>
+  </tr>
+    <tr>
+    <td colspan="9">
+      <span style="text-decoration:underline;">Datum /Unterschrift Mitarbeiter</span>
+      <span style="float: right; text-decoration:underline;">Datum/ Unterschrift/ Bereichsleiter</span>
+      <br><br><br>
     </td>
   </tr>
 </tfoot
@@ -59,7 +133,7 @@
   
 <script type="text/template" id="trTmpl">
  <tr>
-  <td>{{Datum}}</td>
+  <td class="dateTd" >{{Datum}}</td>
   <td>{{Iststunden}}</td>
   <td>{{Eintrag}}</td>
   <td></td>
