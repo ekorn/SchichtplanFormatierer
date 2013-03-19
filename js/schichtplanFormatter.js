@@ -20,6 +20,7 @@ define(['jquery', 'underscore'], function($,_) {
 
         var lastPerson = res[0][2];
 
+        //group by the lines
         var data = $.map(res, function(value, index){
             var line = $.map(value, function(innerVal, innerIndex){
                 if(innerVal !== ""){
@@ -36,10 +37,14 @@ define(['jquery', 'underscore'], function($,_) {
         
         //console.log("lastPerson",lastPerson);
         
+        //group by persons
         var data2 = [];
         var tmp = [];
         $.each(data, function(index, value){
             if(value.line[0].value !== ""){
+            var day = my.parseDate( value.line[3].value);
+            
+                console.log("Date", day);
                 if(lastPerson === value.line[2].value){
                     tmp.push(value);
                 }else{
@@ -106,6 +111,21 @@ define(['jquery', 'underscore'], function($,_) {
 
     });
   };
+  
+    my.parseDate = function(dateString){
+      // var dateString = "03.02.2013";
+      var reggie = /(\d{2}).(\d{2}).(\d{4})/;
+      var dateArray = reggie.exec(dateString); 
+      var dateObject = null;
+      if(dateArray != null){
+        dateObject = new Date(
+          (+dateArray[3]),
+          (+dateArray[2])-1, // Careful, month starts at 0!
+          (+dateArray[1])
+        );
+      }
+      return dateObject;
+    };
 
 
     // This will parse a delimited string into an array of
